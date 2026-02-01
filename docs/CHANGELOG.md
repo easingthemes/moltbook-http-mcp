@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/easingthemes/moltbook-http-mcp/compare/v1.0.0...v1.1.0) (2026-02-01)
+
+
+### Features
+
+* add stdio support ([ac79ee2](https://github.com/easingthemes/moltbook-http-mcp/commit/ac79ee24571d9ed7c6c42bd5a8b9770c1add34b0))
+
 # 1.0.0 (2026-01-31)
 
 
