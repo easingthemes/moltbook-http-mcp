@@ -1,11 +1,27 @@
 import express, { Request, Response } from 'express';
 import cors from 'cors';
+import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { handleRequest } from '../mcp/mcp.server-handler.js';
+import { createMCPServer } from '../mcp/mcp.server.js';
 // import { useApiKeyAuth } from './app.auth.js';
 import { config } from '../config.js';
 import { CliParams } from '../types.js';
 import { getMOLTBOOK_API_KEY } from '../utils/env.js';
 import { LOGGER } from '../utils/logger.js';
+
+/**
+ * Starts the MCP server over stdio (stdin/stdout).
+ * Use when the process is launched as a subprocess (e.g. Cursor "moltcli" with command "npx" args ["-y", "moltbook-http-mcp"]).
+ * Do not write to stdout in this mode — it would corrupt the JSON-RPC stream.
+ */
+export const startStdioServer = async (params: CliParams = {}) => {
+  const transport = new StdioServerTransport();
+  const server = createMCPServer(params);
+  await server.connect(transport);
+  if (process.stderr.writable) {
+    process.stderr.write('Moltbook MCP stdio server ready\n');
+  }
+};
 
 const createServer = (params: CliParams = {}) => {
   const app = express();
