@@ -1,3 +1,13 @@
+# Changelog
+
+## Unreleased
+
+### Features
+
+* **Stdio support** — MCP server can run over stdin/stdout when launched as a subprocess (e.g. Cursor `moltcli` with `command: "npx"`, `args: ["-y", "moltbook-http-mcp"]`). Use `--stdio` explicitly or rely on auto-detect when stdin is not a TTY. Same tools as HTTP mode; see README for both config options.
+
+---
+
 # 1.0.0 (2026-01-31)
 
 
