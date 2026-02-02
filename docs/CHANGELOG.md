@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/easingthemes/moltbook-http-mcp/compare/v1.1.0...v1.1.1) (2026-02-01)
+
+
+### Bug Fixes
+
+* add docs ([00d4c11](https://github.com/easingthemes/moltbook-http-mcp/commit/00d4c11288a9f28f66c51d4274951d1cce8787c2))
+
 # Changelog
 
 # [1.1.0](https://github.com/easingthemes/moltbook-http-mcp/compare/v1.0.0...v1.1.0) (2026-02-01)
