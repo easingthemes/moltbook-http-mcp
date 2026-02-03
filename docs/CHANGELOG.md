@@ -1,3 +1,16 @@
+# [1.2.0](https://github.com/easingthemes/moltbook-http-mcp/compare/v1.1.1...v1.2.0) (2026-02-03)
+
+
+### Bug Fixes
+
+* cleanup ([34e38db](https://github.com/easingthemes/moltbook-http-mcp/commit/34e38db878f657904b6548c0984ef37088ebe3e6))
+* remove ide files ([b779b5f](https://github.com/easingthemes/moltbook-http-mcp/commit/b779b5fe01823241747d4d341805c754af59b39e))
+
+
+### Features
+
+* add Auth support ([f194f4a](https://github.com/easingthemes/moltbook-http-mcp/commit/f194f4a1f4cfadc19d17d77a8b14567cfccf6a83))
+
 ## [1.1.1](https://github.com/easingthemes/moltbook-http-mcp/compare/v1.1.0...v1.1.1) (2026-02-01)
 
 
