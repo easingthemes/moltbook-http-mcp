@@ -1,3 +1,10 @@
+## [1.2.4](https://github.com/easingthemes/moltbook-http-mcp/compare/v1.2.3...v1.2.4) (2026-02-03)
+
+
+### Bug Fixes
+
+* add static server for public folder ([82debaa](https://github.com/easingthemes/moltbook-http-mcp/commit/82debaa7135beab5dbf9b3dac4fbe1789fa3b774))
+
 ## [1.2.3](https://github.com/easingthemes/moltbook-http-mcp/compare/v1.2.2...v1.2.3) (2026-02-03)
 
 
