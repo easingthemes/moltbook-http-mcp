@@ -17,8 +17,9 @@ type CliArgs = CliParams & {
   cert?: string;
 };
 
+const defaultPort = process.env.PORT ? parseInt(process.env.PORT, 10) : 3003;
 const argv = yargs(hideBin(process.argv)).options({
-  port: { type: 'number', default: 3003, alias: 'p', describe: 'Port for MCP HTTP server' },
+  port: { type: 'number', default: Number.isNaN(defaultPort) ? 3003 : defaultPort, alias: 'p', describe: 'Port for MCP HTTP server (default: PORT env or 3003)' },
   stdio: {
     type: 'boolean',
     describe: 'Run MCP over stdin/stdout. Default: true when stdin is not a TTY (subprocess), else false. Use --no-stdio to force HTTP server.',
