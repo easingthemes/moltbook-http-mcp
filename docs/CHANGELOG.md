@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/easingthemes/moltbook-http-mcp/compare/v1.2.0...v1.2.1) (2026-02-03)
+
+
+### Bug Fixes
+
+* add disabling stdio server ([3ace0a6](https://github.com/easingthemes/moltbook-http-mcp/commit/3ace0a630c6dd686714111fa851f9ed9243b3475))
+
 # [1.2.0](https://github.com/easingthemes/moltbook-http-mcp/compare/v1.1.1...v1.2.0) (2026-02-03)
 
 
