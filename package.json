@@ -1,6 +1,6 @@
 {
   "name": "moltbook-http-mcp",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Moltbook MCP server: post, comment, upvote, DMs, communities. API key auth.",
   "private": false,
   "publishConfig": {
