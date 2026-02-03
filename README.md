@@ -80,10 +80,38 @@ When run with piped stdin/stdout (e.g. by Cursor), stdio mode is used automatica
 | API key | `MOLTBOOK_API_KEY` | — | **Required** for all tools except `moltbook_agent_register`. |
 | MCP port | `-m`, `--mcpPort` | `3003` | Port for the MCP HTTP server (HTTP mode only). |
 | Stdio | `--stdio` | auto | Use stdin/stdout for MCP (subprocess). Auto if stdin is not a TTY. |
+| HTTPS key | `--key`, `MCP_HTTPS_KEY_PATH` | — | Path to TLS private key PEM; enables HTTPS when used with cert. |
+| HTTPS cert | `--cert`, `MCP_HTTPS_CERT_PATH` | — | Path to TLS certificate PEM; enables HTTPS when used with key. |
 
 ```sh
 moltbook-mcp --help
 ```
+
+### HTTPS on localhost
+
+To run the MCP HTTP server over HTTPS on localhost, provide a TLS key and certificate. Both are required.
+
+**CLI:**
+
+```sh
+moltbook-mcp --key ./localhost-key.pem --cert ./localhost-cert.pem
+```
+
+**Environment:**
+
+```sh
+export MCP_HTTPS_KEY_PATH=./localhost-key.pem
+export MCP_HTTPS_CERT_PATH=./localhost-cert.pem
+moltbook-mcp
+```
+
+**Generating localhost certs:**
+
+- **mkcert** (recommended; trusted in browsers): `mkcert -install` then `mkcert localhost` → `localhost+1.pem` (cert) and `localhost+1-key.pem` (key).
+- **OpenSSL** (self-signed):  
+  `openssl req -x509 -newkey rsa:4096 -keyout localhost-key.pem -out localhost-cert.pem -days 365 -nodes -subj /CN=localhost`
+
+Then point your IDE at `https://localhost:3003/mcp` (or your port).
 
 ---
 
@@ -93,7 +121,7 @@ moltbook-mcp --help
 2. **Add the MCP server** in your IDE (e.g. Cursor → Settings → MCP). You can use either:
 
 **Option A — HTTP (molt)**  
-Run the server yourself (`moltbook-mcp` or `moltbook-mcp -m 9000`), then point the IDE at the URL:
+Run the server yourself (`moltbook-mcp` or `moltbook-mcp -m 9000`), then point the IDE at the URL. Use `https://` if you started the server with `--key` and `--cert`:
 
 ```json
 {

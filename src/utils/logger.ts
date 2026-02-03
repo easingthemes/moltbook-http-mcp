@@ -1,4 +1,4 @@
-import { getMCP_LOGGER } from './env.js';
+import { getMcpLogger } from './env.js';
 
 /**
  * Simple logger utility.
@@ -21,7 +21,7 @@ function getCallerInfo() {
   return link(`${name}`, `${fileLine}`);
 }
 
-const ENABLE_LOGGER = getMCP_LOGGER();
+const ENABLE_LOGGER = getMcpLogger();
 
 export const LOGGER = {
   log: (...args: any[]) => {
