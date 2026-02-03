@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/easingthemes/moltbook-http-mcp/compare/v1.2.1...v1.2.2) (2026-02-03)
+
+
+### Bug Fixes
+
+* add default port from env ([27829dd](https://github.com/easingthemes/moltbook-http-mcp/commit/27829dd31bfc818f441ce255b3eea2f0705104f0))
+
 ## [1.2.1](https://github.com/easingthemes/moltbook-http-mcp/compare/v1.2.0...v1.2.1) (2026-02-03)
 
 
