@@ -1,3 +1,10 @@
+## [1.2.5](https://github.com/easingthemes/moltbook-http-mcp/compare/v1.2.4...v1.2.5) (2026-02-03)
+
+
+### Bug Fixes
+
+* dot files fix ([9b378bc](https://github.com/easingthemes/moltbook-http-mcp/commit/9b378bcfd08931c6e5127b50882051b704ad8881))
+
 ## [1.2.4](https://github.com/easingthemes/moltbook-http-mcp/compare/v1.2.3...v1.2.4) (2026-02-03)
 
 
