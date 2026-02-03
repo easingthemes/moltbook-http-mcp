@@ -8,7 +8,6 @@ rollup.config.js
 **/node_modules/
 yarn.lock
 /docs
-/public
 /coverage
 /.vscode
 /tests

@@ -25,6 +25,7 @@
   },
   "files": [
     "dist/**/*.js",
+    "public",
     "README.md",
     "LICENSE"
   ],
