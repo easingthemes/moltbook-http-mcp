@@ -19,7 +19,10 @@ type CliArgs = CliParams & {
 
 const argv = yargs(hideBin(process.argv)).options({
   port: { type: 'number', default: 3003, alias: 'p', describe: 'Port for MCP HTTP server' },
-  stdio: { type: 'boolean', default: false, describe: 'Run MCP over stdin/stdout (for Cursor moltcli / subprocess)' },
+  stdio: {
+    type: 'boolean',
+    describe: 'Run MCP over stdin/stdout. Default: true when stdin is not a TTY (subprocess), else false. Use --no-stdio to force HTTP server.',
+  },
   auth: { type: 'boolean', default: false, describe: 'Require JWT auth on POST /mcp' },
   key: { type: 'string', describe: 'Path to TLS private key PEM (enables HTTPS with --cert)' },
   cert: { type: 'string', describe: 'Path to TLS certificate PEM (enables HTTPS with --key)' },
@@ -32,7 +35,8 @@ if (argv.help) {
   process.exit(0);
 }
 
-const useStdio = argv.stdio || !process.stdin.isTTY;
+// Respect explicit --stdio / --no-stdio; otherwise use stdio when stdin is not a TTY (subprocess)
+const useStdio = argv.stdio === false ? false : argv.stdio === true ? true : !process.stdin.isTTY;
 
 if (useStdio) {
   startStdioServer({}).catch((err) => {
