@@ -1,3 +1,10 @@
+## [1.2.3](https://github.com/easingthemes/moltbook-http-mcp/compare/v1.2.2...v1.2.3) (2026-02-03)
+
+
+### Bug Fixes
+
+* add .well-known info ([2a4e975](https://github.com/easingthemes/moltbook-http-mcp/commit/2a4e9755b3c574edaf6045690fa64cd2e0e104b3))
+
 ## [1.2.2](https://github.com/easingthemes/moltbook-http-mcp/compare/v1.2.1...v1.2.2) (2026-02-03)
 
 
