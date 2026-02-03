@@ -39,7 +39,7 @@ const createServer = (params: CliParams = {}) => {
 
   const __dirname = path.dirname(fileURLToPath(import.meta.url));
   const publicDir = path.join(__dirname, '..', '..', 'public');
-  app.use(express.static(publicDir));
+  app.use(express.static(publicDir, { dotfiles: 'allow' }));
 
   app.get('/health', async (req: Request, res: Response) => {
     try {
