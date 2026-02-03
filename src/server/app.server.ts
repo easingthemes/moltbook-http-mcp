@@ -1,12 +1,13 @@
 import express, { Request, Response } from 'express';
 import cors from 'cors';
+import fs from 'fs';
+import https from 'https';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { handleRequest } from '../mcp/mcp.server-handler.js';
 import { createMCPServer } from '../mcp/mcp.server.js';
-// import { useApiKeyAuth } from './app.auth.js';
-import { config } from '../config.js';
+import { apiKeyAuth, requireAuth } from './app.auth.js';
 import { CliParams } from '../types.js';
-import { getMOLTBOOK_API_KEY } from '../utils/env.js';
+import { getMoltbookApiKey, getAppVersion } from '../utils/env.js';
 import { LOGGER } from '../utils/logger.js';
 
 /**
@@ -34,11 +35,9 @@ const createServer = (params: CliParams = {}) => {
   app.use(express.json({ limit: '10mb' }));
   app.use(express.urlencoded({ extended: true }));
 
-  // useApiKeyAuth(app);
-
   app.get('/health', async (req: Request, res: Response) => {
     try {
-      const apiKey = getMOLTBOOK_API_KEY();
+      const apiKey = getMoltbookApiKey();
       let moltbook = 'disconnected';
       let auth = 'not authorized';
       if (apiKey) {
@@ -60,7 +59,7 @@ const createServer = (params: CliParams = {}) => {
         auth,
         mcp: 'ready',
         timestamp: new Date().toISOString(),
-        version: config.APP_VERSION || '1.0.0',
+        version: getAppVersion() || '1.0.0',
       };
       res.json(result);
     } catch (error: any) {
@@ -68,7 +67,7 @@ const createServer = (params: CliParams = {}) => {
     }
   });
 
-  app.post('/mcp', async (req: Request, res: Response) => {
+  app.post('/mcp', requireAuth(params), async (req: Request, res: Response) => {
     await handleRequest(req, res, params);
   });
 
@@ -92,7 +91,7 @@ const createServer = (params: CliParams = {}) => {
     res.json({
       name: 'Moltbook MCP Gateway Server',
       description: 'MCP server for Moltbook: the social network for AI agents. Post, comment, upvote, DMs, communities.',
-      version: config.APP_VERSION || '1.0.0',
+      version: getAppVersion() || '1.0.0',
       endpoints: {
         health: { method: 'GET', path: '/health', description: 'Health check for all services' },
         mcp: { method: 'POST', path: '/mcp', description: 'JSON-RPC endpoint for MCP calls' },
@@ -107,15 +106,31 @@ const createServer = (params: CliParams = {}) => {
 }
 
 export const startServer = (params: CliParams = {}) => {
-  const { mcpPort = 3003 } = params || {};
+  const { mcpPort = 3003, keyPath, certPath } = params || {};
   const app = createServer(params);
-  app.listen(mcpPort, (error) => {
+
+  const onListen = (error?: Error) => {
     if (error) {
       LOGGER.error('Failed to start server:', error);
       process.exit(1);
     }
-    LOGGER.log(`0. Moltbook MCP Server listening on port ${mcpPort}`);
-  });
+    const scheme = keyPath && certPath ? 'https' : 'http';
+    LOGGER.log(`0. Moltbook MCP Server listening on ${scheme}://localhost:${mcpPort}`);
+  };
+
+  if (keyPath && certPath) {
+    try {
+      const key = fs.readFileSync(keyPath, 'utf8');
+      const cert = fs.readFileSync(certPath, 'utf8');
+      const server = https.createServer({ key, cert }, app);
+      server.listen(mcpPort, () => onListen());
+    } catch (err: any) {
+      LOGGER.error('HTTPS: failed to read key or cert:', err?.message ?? err);
+      process.exit(1);
+    }
+  } else {
+    app.listen(mcpPort, onListen);
+  }
 };
 
 process.on('SIGINT', async () => {
