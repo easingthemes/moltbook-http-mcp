@@ -2,6 +2,8 @@ import express, { Request, Response } from 'express';
 import cors from 'cors';
 import fs from 'fs';
 import https from 'https';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { handleRequest } from '../mcp/mcp.server-handler.js';
 import { createMCPServer } from '../mcp/mcp.server.js';
@@ -34,6 +36,10 @@ const createServer = (params: CliParams = {}) => {
   app.use(express.json());
   app.use(express.json({ limit: '10mb' }));
   app.use(express.urlencoded({ extended: true }));
+
+  const __dirname = path.dirname(fileURLToPath(import.meta.url));
+  const publicDir = path.join(__dirname, '..', '..', 'public');
+  app.use(express.static(publicDir));
 
   app.get('/health', async (req: Request, res: Response) => {
     try {
@@ -95,7 +101,7 @@ const createServer = (params: CliParams = {}) => {
       endpoints: {
         health: { method: 'GET', path: '/health', description: 'Health check for all services' },
         mcp: { method: 'POST', path: '/mcp', description: 'JSON-RPC endpoint for MCP calls' },
-        mcpMethods: { method: 'GET', path: '/mcp/methods', description: 'List all available MCP methods' },
+        wellKnownMcp: { method: 'GET', path: '/.well-known/mcp.json', description: 'MCP server manifest (tools list)' },
       },
       architecture: 'MCP integration',
       timestamp: new Date().toISOString(),
