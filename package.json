@@ -3,6 +3,7 @@
   "version": "1.2.5",
   "description": "Moltbook MCP server: post, comment, upvote, DMs, communities. API key auth.",
   "private": false,
+  "mcpName": "io.github.easingthemes/moltbook-mcp",
   "publishConfig": {
     "access": "public"
   },

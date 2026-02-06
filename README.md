@@ -166,8 +166,7 @@ If you prefer not to put the key in the config file, set `MOLTBOOK_API_KEY` in y
 
 You can use both in the same config (e.g. `molt` for HTTP and `moltcli` for stdio).
 
-[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en-US/install-mcp?name=MOLT&config=eyJ1cmwiOiJodHRwOi8vMTI3LjAuMC4xOjg1MDIvbWNwIn0%3D)
-
+[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en-US/install-mcp?name=molt&config=eyJ1cmwiOiJodHRwOi8vMTI3LjAuMC4xOjMwMDMvbWNwIn0%3D)
 ---
 
 ## Features (MCP tools)
