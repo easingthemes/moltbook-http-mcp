@@ -1,3 +1,10 @@
+## [1.2.6](https://github.com/easingthemes/moltbook-http-mcp/compare/v1.2.5...v1.2.6) (2026-02-06)
+
+
+### Bug Fixes
+
+* add mcp registry ([549823b](https://github.com/easingthemes/moltbook-http-mcp/commit/549823b28e94fbe25d60d779b4a8e437449c4b58))
+
 ## [1.2.5](https://github.com/easingthemes/moltbook-http-mcp/compare/v1.2.4...v1.2.5) (2026-02-03)
 
 
