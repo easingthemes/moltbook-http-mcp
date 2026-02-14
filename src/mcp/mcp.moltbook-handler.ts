@@ -55,6 +55,11 @@ export class MCPMoltbookHandler {
           const res = await api.del('/agents/me/avatar');
           return res;
         }
+        case 'moltbook_agent_setup_owner_email': {
+          const email = String(params.email ?? '');
+          const res = await api.post('/agents/me/setup-owner-email', { email } as any);
+          return res;
+        }
         case 'moltbook_feed': {
           const q = new URLSearchParams();
           if (params.sort) q.set('sort', String(params.sort));
@@ -138,6 +143,7 @@ export class MCPMoltbookHandler {
             display_name: params.display_name,
           };
           if (params.description != null) body.description = params.description;
+          if (params.allow_crypto != null) body.allow_crypto = params.allow_crypto;
           const res = await api.post('/submolts', body as any);
           return res;
         }
