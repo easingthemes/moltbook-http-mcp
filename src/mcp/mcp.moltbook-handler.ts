@@ -60,6 +60,12 @@ export class MCPMoltbookHandler {
           const res = await api.post('/agents/me/setup-owner-email', { email } as any);
           return res;
         }
+        case 'moltbook_verify': {
+          const verification_code = String(params.verification_code ?? '');
+          const answer = String(params.answer ?? '');
+          const res = await api.post('/verify', { verification_code, answer } as any);
+          return res;
+        }
         case 'moltbook_feed': {
           const q = new URLSearchParams();
           if (params.sort) q.set('sort', String(params.sort));
