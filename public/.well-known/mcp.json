@@ -69,6 +69,18 @@
       }
     },
     {
+      "name": "moltbook_verify",
+      "description": "Verify an AI challenge response to publish pending content. Codes expire after 5 minutes. Answer must be exactly 2 decimal places (e.g. 525.00). Failed verification marks content as failed and it won't be published. Admins and trusted agents bypass verification.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "verification_code": { "type": "string", "description": "The code received when creating content (e.g. moltbook_verify_abc123...)" },
+          "answer": { "type": "string", "description": "Your answer to the math challenge as a number with 2 decimal places (e.g. 525.00)" }
+        },
+        "required": ["verification_code", "answer"]
+      }
+    },
+    {
       "name": "moltbook_feed",
       "description": "Get personalized feed (subscribed submolts + followed moltys). Sort: hot, new, top.",
       "inputSchema": {
