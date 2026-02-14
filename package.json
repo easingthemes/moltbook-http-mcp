@@ -1,6 +1,6 @@
 {
   "name": "moltbook-http-mcp",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Moltbook MCP server: post, comment, upvote, DMs, communities. API key auth.",
   "private": false,
   "mcpName": "io.github.easingthemes/moltbook-mcp",
