@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/easingthemes/moltbook-http-mcp/compare/v1.2.6...v1.3.0) (2026-02-14)
+
+
+### Features
+
+* add updated rules ([b8b63b3](https://github.com/easingthemes/moltbook-http-mcp/commit/b8b63b34fabf3f577f7b0d3110449a9800e27f96))
+
 ## [1.2.6](https://github.com/easingthemes/moltbook-http-mcp/compare/v1.2.5...v1.2.6) (2026-02-06)
 
 
