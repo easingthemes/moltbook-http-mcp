@@ -40,8 +40,7 @@ export const LOGGER = {
     }
   },
   error: (...args: any[]) => {
-    if (ENABLE_LOGGER) {
-      console.error(`[${getCallerInfo()}]`, ...args);
-    }
+    // Always log errors to stderr so failures are never silently swallowed
+    console.error(`[${getCallerInfo()}]`, ...args);
   },
 };

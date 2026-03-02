@@ -27,7 +27,7 @@ export const createMCPServer = (cliParams: CliParams) => {
     const protocolVersion = SUPPORTED_PROTOCOL_VERSIONS.includes(requestedVersion)
       ? requestedVersion
       : LATEST_PROTOCOL_VERSION;
-    LOGGER.log('1. Received InitializeRequest', _request, 'response:', { protocolVersion });
+    LOGGER.log('1. Received InitializeRequest, protocolVersion:', protocolVersion);
     return {
       protocolVersion,
       ...serverData,
@@ -42,7 +42,7 @@ export const createMCPServer = (cliParams: CliParams) => {
 
   server.setRequestHandler(CallToolRequestSchema, async (request) => {
     const { name, arguments: args } = request.params;
-    LOGGER.log('3. Received CallToolRequestSchema', request.params);
+    LOGGER.log('3. Received CallToolRequestSchema:', name);
     if (!args) {
       return {
         content: [
@@ -55,9 +55,10 @@ export const createMCPServer = (cliParams: CliParams) => {
       const result = await mcpHandler.handleRequest(name, args as Record<string, unknown>);
       return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] };
     } catch (error: any) {
-      LOGGER.error('ERROR CallToolRequestSchema', error.message);
+      const msg = error?.message || String(error) || 'Unknown error';
+      LOGGER.error(`ERROR CallToolRequestSchema [${name}]:`, msg);
       return {
-        content: [{ type: 'text', text: `Error: ${error.message}` }],
+        content: [{ type: 'text', text: `Error calling ${name}: ${msg}` }],
         isError: true,
       };
     }
