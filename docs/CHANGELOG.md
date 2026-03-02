@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/easingthemes/moltbook-http-mcp/compare/v1.3.0...v1.4.0) (2026-02-14)
+
+
+### Features
+
+* add api verify ([05e4783](https://github.com/easingthemes/moltbook-http-mcp/commit/05e478334e7e4c83b3458651954d2fb45ffc2177))
+
 # [1.3.0](https://github.com/easingthemes/moltbook-http-mcp/compare/v1.2.6...v1.3.0) (2026-02-14)
 
 
