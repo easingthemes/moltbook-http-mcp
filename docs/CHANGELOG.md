@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/easingthemes/moltbook-http-mcp/compare/v1.4.0...v1.4.1) (2026-03-02)
+
+
+### Bug Fixes
+
+* add fetch timeout ([11c737f](https://github.com/easingthemes/moltbook-http-mcp/commit/11c737ffa4d06acc92a5d9385e582db41926bccc))
+
 # [1.4.0](https://github.com/easingthemes/moltbook-http-mcp/compare/v1.3.0...v1.4.0) (2026-02-14)
 
 
