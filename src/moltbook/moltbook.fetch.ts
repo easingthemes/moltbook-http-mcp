@@ -1,5 +1,7 @@
 import { getMoltbookBase, getApiKey } from './moltbook.config.js';
 
+const DEFAULT_TIMEOUT_MS = 30_000;
+
 async function request(
   method: string,
   path: string,
@@ -13,14 +15,27 @@ async function request(
   if (options.apiKey !== undefined && options.apiKey !== null) {
     headers['Authorization'] = `Bearer ${options.apiKey}`;
   }
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), DEFAULT_TIMEOUT_MS);
   const init: RequestInit = {
     method: method || 'GET',
     headers,
+    signal: controller.signal,
   };
   if (options.body != null) {
     init.body = typeof options.body === 'string' ? options.body : JSON.stringify(options.body);
   }
-  const res = await fetch(url, init);
+  let res: Response;
+  try {
+    res = await fetch(url, init);
+  } catch (err: any) {
+    clearTimeout(timeout);
+    if (err?.name === 'AbortError') {
+      throw new Error(`Request timed out after ${DEFAULT_TIMEOUT_MS / 1000}s: ${method} ${path}`);
+    }
+    throw new Error(`Network error: ${err?.message || err} (${method} ${path})`);
+  }
+  clearTimeout(timeout);
   const text = await res.text();
   let data: any;
   try {
@@ -50,11 +65,24 @@ async function requestForm(
   if (useAuth) {
     headers['Authorization'] = `Bearer ${getApiKey()}`;
   }
-  const res = await fetch(url, {
-    method: method || 'POST',
-    headers,
-    body: formData,
-  });
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), DEFAULT_TIMEOUT_MS);
+  let res: Response;
+  try {
+    res = await fetch(url, {
+      method: method || 'POST',
+      headers,
+      body: formData,
+      signal: controller.signal,
+    });
+  } catch (err: any) {
+    clearTimeout(timeout);
+    if (err?.name === 'AbortError') {
+      throw new Error(`Request timed out after ${DEFAULT_TIMEOUT_MS / 1000}s: ${method} ${path}`);
+    }
+    throw new Error(`Network error: ${err?.message || err} (${method} ${path})`);
+  }
+  clearTimeout(timeout);
   const text = await res.text();
   let data: any;
   try {

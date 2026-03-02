@@ -22,7 +22,7 @@ function getApiKeyFromRequest(req: Request): string {
 }
 
 export const handleRequest = async (req: Request, res: Response, cliParams: CliParams) => {
-  LOGGER.log('1.Received MCP request:', req.body);
+  LOGGER.log('1.Received MCP request:', { method: req.body?.method, id: req.body?.id });
   const { jsonrpc, id, method } = req.body;
   if (jsonrpc !== '2.0' || !method) {
     res.status(400).json({
@@ -88,7 +88,7 @@ export const handleRequest = async (req: Request, res: Response, cliParams: CliP
 
       await transport.handleRequest(req, res, req.body);
     } catch (error) {
-      LOGGER.error('Error handling MCP request:', error);
+      LOGGER.error('Error handling MCP request:', (error as any)?.message || error);
       if (!res.headersSent) {
         res.status(500).json({
           jsonrpc: '2.0',
